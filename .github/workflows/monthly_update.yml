@@ -1,0 +1,117 @@
+
+name: Metrics
+on:
+  # 🌏 Think about the planet! No need to update stats too frequently
+  schedule: [{cron: "0 0 1 * *"}]
+  # (optional) Run workflow manually
+  workflow_dispatch:
+  # (optional) Run workflow when pushing on master/main
+  push: 
+    branches: ["master", "main"]
+    paths:
+      - "README.md"
+      - "generated/**"
+      - ".github/workflows/monthly_update.yml"
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+#      - uses: lowlighter/metrics@latest
+#        with:
+#          config_output:  markdown # | svg
+#          output_condition: data-changed
+#          filename: generated/base.*
+#          config_timezone: Europe/Rome
+#
+#          token: ${{ secrets.METRICS_TOKEN }}
+#
+#          base: activity, community, repositories
+#
+#      - uses: lowlighter/metrics@latest
+#        with:
+#          config_output:  markdown # | svg
+#          output_condition: data-changed
+#          filename: generated/starlists.*
+#          config_timezone: Europe/Rome
+#          token: ${{ secrets.METRICS_TOKEN }}
+#
+#          base_skip: yes
+#          plugin_starlists: yes
+#          plugin_starlists_limit_languages: 8
+#          plugin_starlists_limit_repositories: 0
+#
+#      - uses: lowlighter/metrics@latest
+#        with:
+#          config_output:  markdown # | svg
+#          output_condition: data-changed
+#          filename: generated/starlists_languages.*
+#          config_timezone: Europe/Rome
+#          token: ${{ secrets.METRICS_TOKEN }}
+#
+#          base_skip: yes
+#          plugin_starlists_languages: yes
+#          plugin_starlists_limit_languages: 8
+#          plugin_starlists_limit_repositories: 0
+#
+#      - uses: lowlighter/metrics@latest
+#        with:
+#          config_output:  markdown # | svg
+#          output_condition: data-changed
+#          filename: generated/topics.*
+#          config_timezone: Europe/Rome
+#          token: ${{ secrets.METRICS_TOKEN }}
+#
+#          base_skip: yes
+#          plugin_topics: yes
+#          plugin_topics_limit: 0
+#          plugin_topics_mode: icons
+#
+#      - uses: lowlighter/metrics@latest
+#        with:
+#          config_output:  markdown # | svg
+#          output_condition: data-changed
+#          filename: generated/16ps.*
+#          config_timezone: Europe/Rome
+#          token: ${{ secrets.METRICS_TOKEN }}
+#
+#          base_skip: yes
+#          plugin_16personalities: yes
+#          plugin_16personalities_url: ${{ secrets.SIXTEEN_PERSONALITIES_URL }}
+#          plugin_16personalities_sections: personality, traits
+#          plugin_16personalities_scores: no
+#
+      - uses: lowlighter/metrics@latest
+        with:
+          config_output:  svg
+          filename: generated/complete.*
+
+          config_timezone: Europe/Rome
+          config_order: >
+            base,
+            classic,
+            starlists,
+            topics,
+            16personalities
+
+          token: ${{ secrets.METRICS_TOKEN }}
+
+          base: activity, community, repositories
+
+          plugin_starlists: yes
+          # plugin_starlists_languages: yes
+          plugin_starlists_limit_languages: 8
+          plugin_starlists_limit_repositories: 0
+
+          plugin_topics: yes
+          plugin_topics_limit: 0
+          plugin_topics_mode: icons
+
+          # plugin_habits: yes
+
+          plugin_16personalities: yes
+          plugin_16personalities_url: ${{ secrets.SIXTEEN_PERSONALITIES_URL }}
+          plugin_16personalities_sections: personality, traits
+          plugin_16personalities_scores: no

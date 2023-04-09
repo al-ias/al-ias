@@ -1,0 +1,12 @@
+{
+  "name": "al-ias",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:al-ias/al-ias.git",
+  "author": "Al <80943867+al-ias@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "echo \"Downloading act https://github.com/nektos/act\n\"  && curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash",
+    "test": "bin/act"
+  }
+}
